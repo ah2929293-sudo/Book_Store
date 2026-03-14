@@ -1,3 +1,6 @@
+import 'package:book_store/core/routes/app_router.dart';
+import 'package:book_store/feature/auth/ui/login_screen.dart';
+import 'package:book_store/feature/auth/ui/register_screen.dart';
 import 'package:book_store/feature/welcome/ui/widgets/welcome_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +19,11 @@ class BookStoreApp extends StatelessWidget {
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
         locale: context.locale,
-        theme: ThemeData(fontFamily: "DM"),
+        theme: ThemeData(
+          fontFamily: "DM",
+          scaffoldBackgroundColor: Colors.white,
+        ),
+        onGenerateRoute: AppRouter().onGenerateRoute,
         home: WelcomeScreen(),
       ),
     );

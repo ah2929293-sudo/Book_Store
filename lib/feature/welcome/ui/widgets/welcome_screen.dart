@@ -1,3 +1,4 @@
+import 'package:book_store/core/routes/routes.dart';
 import 'package:book_store/core/widgets/app_button.dart';
 import 'package:book_store/gen/assets.gen.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -47,11 +48,19 @@ class WelcomeScreen extends StatelessWidget {
                 style: TextStyle(fontFamily: "DM", fontSize: 20.sp),
               ),
             ),
-            AppButton(title: LocaleKeys.login.tr()),
+            AppButton(
+              title: LocaleKeys.login.tr(),
+              onTap: () async {
+                await Navigator.pushNamed(context, Routes.loginScreen);
+              },
+            ),
             SizedBox(height: 15.h),
             AppButton(
               backGroundColor: Colors.white,
               title: LocaleKeys.register.tr(),
+              onTap: () async {
+                await Navigator.pushNamed(context, Routes.registerScreen);
+              },
             ),
             SizedBox(height: 94.h),
           ],

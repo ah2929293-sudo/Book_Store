@@ -14,6 +14,15 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/Group.svg
+  String get group => 'assets/images/Group.svg';
+
+  /// File path: assets/images/cib_apple.svg
+  String get cibApple => 'assets/images/cib_apple.svg';
+
+  /// File path: assets/images/google_ic.svg
+  String get googleIc => 'assets/images/google_ic.svg';
+
   /// File path: assets/images/splash.png
   AssetGenImage get splash => const AssetGenImage('assets/images/splash.png');
 
@@ -26,7 +35,10 @@ class $AssetsImagesGen {
       const AssetGenImage('assets/images/welcome_background.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [
+  List<dynamic> get values => [
+    group,
+    cibApple,
+    googleIc,
     splash,
     splashandroid12,
     welcomeBackground,
