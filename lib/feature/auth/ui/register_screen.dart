@@ -1,5 +1,5 @@
 import 'package:book_store/core/widgets/app_button.dart';
-import 'package:book_store/core/widgets/custom_app_bar.dart';
+import 'package:book_store/core/widgets/custom_arrow_back.dart';
 import 'package:book_store/core/widgets/custom_text_form_field.dart';
 import 'package:book_store/localization/locale_keys.g.dart';
 import 'package:dio/dio.dart';
@@ -28,7 +28,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: CustomArrowBack(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),

@@ -1,6 +1,8 @@
+import 'package:book_store/core/helper/app_constants.dart';
 import 'package:book_store/core/routes/app_router.dart';
 import 'package:book_store/feature/auth/ui/login_screen.dart';
 import 'package:book_store/feature/auth/ui/register_screen.dart';
+import 'package:book_store/feature/bottom_nav_bar/ui/bottom_nav_bar_screen.dart';
 import 'package:book_store/feature/welcome/ui/widgets/welcome_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -24,8 +26,16 @@ class BookStoreApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.white,
         ),
         onGenerateRoute: AppRouter().onGenerateRoute,
-        home: WelcomeScreen(),
+        home: startScreen(),
       ),
     );
+  }
+
+  Widget startScreen() {
+    if (AppConstants.token == null) {
+      return WelcomeScreen();
+    } else {
+      return BottomNavBarScreen();
+    }
   }
 }

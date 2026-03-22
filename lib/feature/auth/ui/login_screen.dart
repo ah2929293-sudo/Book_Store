@@ -1,11 +1,14 @@
+import 'package:book_store/core/routes/routes.dart';
 import 'package:book_store/core/widgets/app_button.dart';
-import 'package:book_store/core/widgets/custom_app_bar.dart';
+import 'package:book_store/core/widgets/custom_arrow_back.dart';
 import 'package:book_store/core/widgets/custom_text_form_field.dart';
+import 'package:book_store/feature/auth/cubit/auth_cubit.dart';
 import 'package:book_store/gen/assets.gen.dart';
 import 'package:book_store/localization/locale_keys.g.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -30,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: CustomArrowBack(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -68,11 +71,40 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 SizedBox(height: 30.h),
-                AppButton(
-                  title: LocaleKeys.login.tr(),
-                  onTap: () async {
-                    await login();
+                BlocListener<AuthCubit, AuthState>(
+                  listener: (context, state) {
+                    if (state is AuthLoadingState) {
+                      showDialog(
+                        context: context,
+                        builder: (context) =>
+                            Center(child: CircularProgressIndicator()),
+                      );
+                    } else if (state is AuthErrorState) {
+                      Navigator.pop(context);
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text("Error"),
+                          content: Text("Somehing Wrong Please try again"),
+                        ),
+                      );
+                    } else if (state is AuthSuccessState) {
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        Routes.BottomNavBarScreen,
+                        (route) => false,
+                      );
+                    }
                   },
+                  child: AppButton(
+                    title: LocaleKeys.login.tr(),
+                    onTap: () {
+                      context.read<AuthCubit>().login(
+                        email: emailController.text,
+                        password: passwordController.text,
+                      );
+                    },
+                  ),
                 ),
                 SizedBox(height: 30.h),
                 Divider(color: Colors.grey, thickness: 1),
@@ -133,15 +165,8 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-
-  login() async {
-    Dio dio = Dio();
-    final response = await dio.post(
-      "https://codingarabic.online/api/login",
-      data: {
-        "email": emailController.text,
-        "password": passwordController.text,
-      },
-    );
-  }
 }
+
+
+
+//هعمل صفحه تانيه للسونر ف ويدجت ف الاوس 
