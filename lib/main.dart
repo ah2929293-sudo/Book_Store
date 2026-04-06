@@ -1,5 +1,6 @@
 import 'package:book_store/book_store_app.dart';
 import 'package:book_store/core/helper/app_constants.dart';
+import 'package:book_store/core/networking/dio_helper.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -9,6 +10,7 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   AppConstants.token = prefs.getString("token");
+  await DioHelper.init();
 
   runApp(
     EasyLocalization(

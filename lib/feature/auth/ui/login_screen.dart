@@ -5,7 +5,6 @@ import 'package:book_store/core/widgets/custom_text_form_field.dart';
 import 'package:book_store/feature/auth/cubit/auth_cubit.dart';
 import 'package:book_store/gen/assets.gen.dart';
 import 'package:book_store/localization/locale_keys.g.dart';
-import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

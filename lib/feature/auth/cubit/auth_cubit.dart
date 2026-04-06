@@ -16,4 +16,26 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthErrorState());
     }
   }
+
+  Future<void> register({
+    required String name,
+    required String email,
+    required String password,
+    required String password_confirmation,
+    String? address,
+    String? city,
+  }) async {
+    emit(AuthLoadingState());
+    final response = await AuthRepo.register(
+      name: name,
+      email: email,
+      password: password,
+      password_confirmation: password_confirmation,
+    );
+    if (response == true) {
+      emit(AuthSuccessState());
+    } else {
+      emit(AuthErrorState());
+    }
+  }
 }
