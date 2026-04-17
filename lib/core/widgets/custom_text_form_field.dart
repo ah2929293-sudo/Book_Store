@@ -10,6 +10,7 @@ class CustomTextFormField extends StatefulWidget {
   final TextEditingController? controller;
   final String hintText;
   final TextInputType? keyboardType;
+  final void Function(String)? onChanged;
   // ignore: prefer_typing_uninitialized_variables
   final isPassword;
   const CustomTextFormField({
@@ -18,6 +19,7 @@ class CustomTextFormField extends StatefulWidget {
     this.isPassword = false,
     required this.hintText,
     this.controller,
+    this.onChanged,
   });
 
   @override
@@ -29,6 +31,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: widget.onChanged,
       onTapOutside: (event) {
         FocusScope.of(context).unfocus();
       },

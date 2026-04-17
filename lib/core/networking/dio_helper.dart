@@ -1,3 +1,4 @@
+import 'package:book_store/core/helper/app_constants.dart';
 import 'package:book_store/core/networking/api_constants.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -7,7 +8,12 @@ class DioHelper {
   static Dio? dio;
 
   static init() {
-    dio = Dio(BaseOptions(baseUrl: ApiConstants.baseUrl));
+    dio = Dio(
+      BaseOptions(
+        baseUrl: ApiConstants.baseUrl,
+        headers: {"Authorization": "Bearer ${AppConstants.token}"},
+      ),
+    );
     dio?.interceptors.add(
       PrettyDioLogger(
         requestHeader: true,

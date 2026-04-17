@@ -13,3 +13,19 @@ final class SliderSuccessState extends HomeState {
 }
 
 final class SliderErrorState extends HomeState {}
+
+final class BestSellerErrorState extends HomeState {}
+
+final class BestSellerSuccessState extends HomeState {
+  final List<Product>? products;
+
+  BestSellerSuccessState(this.products);
+}
+
+final class BestSellerLoadingState extends HomeState {}
+
+final class AddToCartLoadingState extends HomeState {}
+
+final class AddToCartSuccessState extends HomeState {}
+
+final class AddToCartErrorState extends HomeState {}

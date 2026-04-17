@@ -3,6 +3,8 @@ import 'package:book_store/feature/auth/cubit/auth_cubit.dart';
 import 'package:book_store/feature/auth/ui/login_screen.dart';
 import 'package:book_store/feature/auth/ui/register_screen.dart';
 import 'package:book_store/feature/bottom_nav_bar/ui/bottom_nav_bar_screen.dart';
+import 'package:book_store/feature/serch/cubit/search_cubit.dart';
+import 'package:book_store/feature/serch/ui/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,6 +27,13 @@ class AppRouter {
         );
       case Routes.BottomNavBarScreen:
         return MaterialPageRoute(builder: (_) => BottomNavBarScreen());
+      case Routes.searchScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => SearchCubit(),
+            child: SearchScreen(),
+          ),
+        );
       default:
         return null;
     }

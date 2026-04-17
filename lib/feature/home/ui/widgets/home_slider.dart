@@ -6,6 +6,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomeSlider extends StatefulWidget {
@@ -20,9 +21,20 @@ class _HomeSliderState extends State<HomeSlider> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
+      buildWhen: (previous, current) =>
+          current is SliderErrorState ||
+          current is SliderLodingState ||
+          current is SliderSuccessState,
       builder: (context, state) {
         if (state is SliderLodingState) {
-          return CircularProgressIndicator();
+          return Skeletonizer(
+            enabled: true,
+            child: Container(
+              height: 180.h,
+              width: double.infinity,
+              color: Colors.grey,
+            ),
+          );
         } else if (state is SliderSuccessState) {
           return Column(
             children: [
